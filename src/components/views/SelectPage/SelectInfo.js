@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import SelectDate from './SelectDate'
+import SelectTime from './SelectTime'
 
 function SelectInfo() {
     const [sex, setSex] = useState("woman")
@@ -15,8 +16,8 @@ function SelectInfo() {
             </div>
             <div>당신의 생년월일은?</div>
                 <SelectDate></SelectDate>
-            
             <div>몇 시에 태어났나요?</div>
+                <SelectTime></SelectTime>
         </div>
     )
 }

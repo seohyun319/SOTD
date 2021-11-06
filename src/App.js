@@ -1,4 +1,4 @@
-import SelectInfo from "./components/views/SelectInfo"
+import SelectInfo from "./components/views/SelectPage/SelectInfo"
 
 function App() {
   return (
