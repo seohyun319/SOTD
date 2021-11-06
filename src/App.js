@@ -1,4 +1,3 @@
-import './App.css';
 import SelectInfo from "./components/views/SelectInfo"
 
 function App() {

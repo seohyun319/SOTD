@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import SelectDate from './SelectDate'
 
 function SelectInfo() {
     const [sex, setSex] = useState("woman")
@@ -13,6 +14,7 @@ function SelectInfo() {
                 <input type="radio" value={sex} checked={sex == "man"} />남
             </div>
             <div>당신의 생년월일은?</div>
+                <SelectDate></SelectDate>
             
             <div>몇 시에 태어났나요?</div>
         </div>
