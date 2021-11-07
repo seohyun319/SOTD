@@ -54,8 +54,6 @@ const reset=schedule.scheduleJob('0 0 0 * * *', ()=>{
 app.post('/select/', (req,res)=>{   //생년월일 확인
     var month=req.body.month;
     var day=req.body.day;
-    res.cookie('birthday', 'month');
-    console.log(req.cookies);
     res.send({month: month, day:day});
 })
 
@@ -102,12 +100,7 @@ app.post('/select/fortune/', (req, res)=>{ //생일 받아오기
     var query=connection.query('SELECT luck FROM birth WHERE (month=? AND day=?);',sql,(err, rows, fields)=>{
         console.log(rows[0]);
         res.send(rows[0]);
-        // request.post('http://localhost:5000/select/fortunefood',{form:{    //category에서 가게 이름 추출하기 위해 전달
-        //     category: rows,
-        //     month: month,
-        //     day: day
-        // }})
-       
+    
     })
 })
 
