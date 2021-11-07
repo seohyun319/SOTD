@@ -1,0 +1,32 @@
+.App {
+    justify-content: center;
+    display: flex;
+}
+
+.content {
+    max-width: 60rem;
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    grid-template-areas:
+        'q_sex sex'
+        'q_birth birth'
+        'q_time time'
+        'btn btn';
+}
+
+.q_sex {
+    grid-area: q_sex;
+}
+.q_birth {
+    grid-area: q_birth;
+}
+.q_time {
+    grid-area: q_time;
+}
+.sex {
+    grid-area: sex;   
+    display: flex; 
+}
+Button {
+    grid-area: btn;        
+}
