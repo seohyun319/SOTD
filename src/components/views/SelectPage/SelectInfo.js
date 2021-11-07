@@ -11,11 +11,11 @@ function SelectInfo() {
         <div className="content">
             <div className="title_q q_sex">당신의 성별은? </div>
             <div className="sex">                
-                <div class="woman" onClick={() => {setSex("woman")}}>
-                    <input type="radio" value={sex} checked={sex == "woman"} />여
+                <div className="woman" onClick={() => {setSex("woman")}}>
+                    <input type="radio" value={sex} checked={sex === "woman"} />여
                 </div>
                 <div className="man" onClick={() => {setSex("man")}}>
-                    <input type="radio" value={sex} checked={sex == "man"} />남
+                    <input type="radio" value={sex} checked={sex ===  "man"} />남
                 </div>
             </div>
             <div className="title_q q_birth">당신의 생년월일은?</div>

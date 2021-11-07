@@ -18,21 +18,21 @@ function SelectDate() {
     const year = () => {
         const result = [];
         for (let i = 2020; i > 1930; i--) {
-            result.push(<option value="{i}">{i}</option>);
+            result.push(<option value={i}>{i}</option>);
         }
         return result;
     };
     const month = () => {
         const result = [];
         for (let i = 1; i < 13; i++) {
-            result.push(<option value="{i}">{i}</option>);
+            result.push(<option value={i}>{i}</option>);
         }
         return result;
     };
     const day = () => {
         const result = [];
         for (let i = 1; i < 32; i++) {
-            result.push(<option value="{i}">{i}</option>);
+            result.push(<option value={i}>{i}</option>);
         }
         return result;
     };
