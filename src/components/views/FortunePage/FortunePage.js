@@ -1,19 +1,32 @@
 import React from 'react'
 import axios from 'axios'
+import { useState, useEffect } from 'react';
 import './FortunePage.css'
 import HomeBtn from '../HomeBtn'
-import {useState} from 'react'
 
-function FortunePage(dataToSubmit) {
-    const [fortuneResult, setFortuneResult] = useState("")
+function FortunePage() {
     let body = {
         month : 5,
         day : 15,
     }
-    const request = axios.post('http://localhost:5000/select/fortune/', body)
-        .then(response => {
-            console.log(response)
-        })
+
+    const [users, setUsers] = useState("");
+
+    const fetchUsers = async () => {
+        const response = await axios.post('http://localhost:5000/select/fortune/', body);
+        setUsers(response.data);
+        console.log(response.data)
+    };
+    console.log(users);
+    
+
+ useEffect(() => {
+    fetchUsers();
+  }, []);
+
+
+    // const request = axios.post('http://localhost:5000/select/fortune', body)
+    //     .then(response => {console.log(response)})
         
     // return {
         
@@ -53,7 +66,8 @@ function FortunePage(dataToSubmit) {
     // }
     return (
         <div className="base">
-            결과 페이지입니당
+            <h5>오늘 당신에게 맞는 음식은?</h5>
+            <div>{users}</div>
             <HomeBtn />
         </div>
     )
