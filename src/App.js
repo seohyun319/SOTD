@@ -14,8 +14,8 @@ function App() {
         <Routes>
           <Route exact path="/" element={<LandingPage />}></Route>
           <Route path="/select" element={<SelectPage />}></Route>
-          <Route path="/fortune" element={<FortunePage />}></Route>
-          <Route path="/color" element={<ColorPage />}></Route>
+          <Route path="/select/fortune" element={<FortunePage />}></Route>
+          <Route path="/select/color" element={<ColorPage />}></Route>
         </Routes>
       </div>
     </BrowserRouter> 
