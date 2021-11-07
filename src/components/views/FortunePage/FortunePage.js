@@ -1,6 +1,20 @@
 import React from 'react'
+import axios from 'axios'
 
-function FortunePage() {
+function FortunePage(dataToSubmit) {
+    let body = {
+        month : 5,
+        day : 15,
+    }
+
+    const request = axios.post('http://localhost:5000/info/fortune', body,{withCredentials: true})
+        .then(response => {console.log(response)})
+        
+    // return {
+        
+    // }
+
+
     // const acceptReqHandler = (e) => {
     //     e.preventDefault();
     //     let body = {
