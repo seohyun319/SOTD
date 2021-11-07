@@ -32,9 +32,9 @@ app.use(cors({
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, origin');
     res.setHeader('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
     (req.method === 'OPTIONS') ?
     res.send(200) :
     next();
@@ -49,25 +49,25 @@ const reset=schedule.scheduleJob('0 0 0 * * *', ()=>{
     }
 })
 
-app.post('/info', (req,res)=>{   //생년월일 확인
+app.post('/select/', (req,res)=>{   //생년월일 확인
     var month=req.body.month;
     var day=req.body.day;
-    res.json({month:month, day:day});
+    res.send({month: month, day:day});
 })
 
-// app.post('/info/fortune', (req, res)=>{ //생일 받아오기
+// app.post('/select/fortune/', (req, res)=>{ //생일 받아오기
 //     var month=req.body.month;
 //     var day=req.body.day;
 //     var sql=[month, day];
     // var query=connection.query('SELECT luck FROM birth WHERE month=? AND day=?',[4,1],(err, rows, fields)=>{    //운세 전송
-    //     request.post('http://localhost:5000/info/category',{form:{    
+    //     request.post('http://localhost:5000/select/category',{form:{    
     //         luck: rows,
     //     }})
     //     // res.send(rows);
     // })
 // })
 
-// app.post('/info/category',(req,res)=>{
+// app.post('/select/category',(req,res)=>{
 //     var luck=req.body.luck; 
 //     var lucky=luck[0].luck;
 //         var query=connection.query('SELECT category FROM FORTUNE WHERE luck=?', lucky ,(err,rows,fields)=>{
@@ -79,7 +79,7 @@ app.post('/info', (req,res)=>{   //생년월일 확인
         
 // })
 
-// app.post('/info/fortunefood', (req, res)=>{ //가게 이름 전송
+// app.post('/select/fortunefood', (req, res)=>{ //가게 이름 전송
 //     var luck=req.body.luck;
 //     console.log(luck[0]);
 //     var cate=req.body.category; 
@@ -91,32 +91,36 @@ app.post('/info', (req,res)=>{   //생년월일 확인
 //     }
 // })
 
-app.post('/info/fortune', (req, res)=>{ //생일 받아오기
+app.post('/select/fortune/', (req, res)=>{ //생일 받아오기
     var month=req.body.month;
     var day=req.body.day;
     var sql=[month, day];
-    var query=connection.query('SELECT category FROM FORTUNE WHERE luck=(SELECT luck FROM birth WHERE month=? AND day=?)',[4,1],(err, rows, fields)=>{
-        request.post('http://localhost:5000/info/fortunefood',{form:{    //category에서 가게 이름 추출하기 위해 전달
+    var query=connection.query('SELECT category FROM FORTUNE WHERE luck=(SELECT luck FROM birth WHERE month=? AND day=?)',sql,(err, rows, fields)=>{
+        request.post('http://localhost:5000/select/fortunefood',{form:{    //category에서 가게 이름 추출하기 위해 전달
             category: rows,
-            month: 4,
-            day: 1
+            month: month,
+            day: day
         }})
+        res.send(rows);
     })
 })
 
-app.post('/info/fortunefood',(req,res)=>{
+app.post('/select/fortunefood/',(req,res)=>{
     var month=req.body.month;
     var day=req.body.day;
     var sql=[month, day];
     var category=req.body.category; //category column 값
-    for(var i=0;i<category.length;i++){
-        var cate=(category[i].category).split(', ');    //category를 , 기준으로 나누기
-        for(var j=0;j<cate.length;j++){
-            var query=connection.query('SELECT distinct title FROM '+ cate[j]+' ORDER BY RAND() limit 1;'+'SELECT luck FROM birth WHERE month=? AND day=?',sql,(err,rows,fields)=>{
-                res.send(rows);  //rows[1][0].luck
-            })
-        }
+    var cate;
+    for(var i=0;i<category.length;i++)
+        cate=(category[i].category).split(', ');    //category를 , 기준으로 나누기
+    for(var i=0;i<cate.length;i++){
+        var query=connection.query('SELECT distinct title FROM '+ cate[i]+' ORDER BY RAND() limit 1;'+'SELECT luck FROM birth WHERE month=? AND day=?',sql,(err,rows,fields)=>{
+            res.json(rows);
+            return;
+        })
+        return;
     }
+    return;      
 })
 
 app.post('/info/color', (req,res)=>{

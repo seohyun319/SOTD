@@ -2,12 +2,12 @@ import React from 'react'
 import axios from 'axios'
 
 function FortunePage(dataToSubmit) {
+    
     let body = {
         month : 5,
         day : 15,
     }
-
-    const request = axios.post('http://localhost:5000/info/fortune', body,{withCredentials: true})
+    const request = axios.post('http://localhost:5000/select/fortune/', body)
         .then(response => {console.log(response)})
         
     // return {
@@ -31,7 +31,7 @@ function FortunePage(dataToSubmit) {
     // }
 
 
-function FortunePage() {
+// function FortunePage() {
     // const acceptReqHandler = (e) => {
     //     e.preventDefault();
     //     let body = {
@@ -52,5 +52,6 @@ function FortunePage() {
         </div>
     )
 }
+
 
 export default FortunePage
