@@ -58,7 +58,7 @@ function SelectPage() {
             <div className="title_q q_sex">당신의 성별은? </div>            
                 <SelectSex></SelectSex>
             <div className="title_q q_birth">당신의 생년월일은?</div>
-                <div>
+                <div className="ymd">
                     <select value={selectedYear} onChange={handleSelectYear}>
                         {year()}
                     </select>년
