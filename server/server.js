@@ -140,9 +140,10 @@ app.post('/select/fortunefood/',(req,res)=>{
 })
 
 app.post('/select/fortunestore/',(req,res)=>{
-    var store=req.body.store;
-    console.log(store);
-    var query=connection.query('SELECT title FROM '+store+ ' ORDER BY RAND() limit 1',(err, rows, fields)=>{
+    var store=[vegetable, chicken, tea, cow, nourish, bland, warm, koeran, calcium, fish, vitamin, juk, noodle, meat, fastfood, curry, spicy, western, special, tree, soil, fermentation];
+    var rand=Math.floor(Math.random()*22);
+    console.log(store[rand]);
+    var query=connection.query('SELECT title FROM '+store[rand]+ ' ORDER BY RAND() limit 1',(err, rows, fields)=>{
         console.log(rows);
         res.send(rows);
     })
