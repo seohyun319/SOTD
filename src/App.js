@@ -1,7 +1,8 @@
 import Background from './components/static/milky-way.jpg';
 import SelectPage from "./components/views/SelectPage/SelectPage";
 import FortunePage from './components/views/FortunePage/FortunePage';
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import ColorPage from './components/views/ColorPage/ColorPage';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
@@ -10,8 +11,9 @@ function App() {
       // style={{backgroundImage:`url(${Background})`}}
       >        
         <Routes>
-          <Route path="/" element={<SelectPage />}></Route>
+          <Route exact path="/" element={<SelectPage />}></Route>
           <Route path="/fortune" element={<FortunePage />}></Route>
+          <Route path="/color" element={<ColorPage />}></Route>
         </Routes>
       </div>
     </BrowserRouter> 
