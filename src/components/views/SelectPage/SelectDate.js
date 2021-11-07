@@ -65,13 +65,13 @@ function SelectDate() {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        console.log('month', selectedMonth)
-        console.log('day', selectedDay)
         let body = {
             month : selectedMonth,
             day : selectedDay,
         }
-        axios.post('https://localhost:5000/info/fortune', body)
+        axios.post('https://localhost:5000/info/fortune', body, {
+            withCredentials: true,
+        })
         .then(res => {
             // res.data
             console.log(res)
