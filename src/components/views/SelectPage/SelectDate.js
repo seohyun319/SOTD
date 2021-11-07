@@ -3,11 +3,12 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Button} from 'react-bootstrap';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 function SelectDate() {
-    const [selectedYear, setSelectedYear] = useState();
-    const [selectedMonth, setSelectedMonth] = useState();
-    const [selectedDay, setSelectedDay] = useState(20)
+    const [selectedYear, setSelectedYear] = useState(2000);
+    const [selectedMonth, setSelectedMonth] = useState(1);
+    const [selectedDay, setSelectedDay] = useState(1)
     const handleSelectYear = (e) => {
         setSelectedYear(e.target.value);
     };
@@ -40,42 +41,46 @@ function SelectDate() {
         return result;
     };
 
+
+
     
-
-
+    
+    
     // useEffect(() => {
-    //     axios.post("https://localhost:3000/info/fortune")
-    //         .then((req) => {
-    //             setSelectedMonth(res.data)
-    //             setSelectedDay(res.data)
-    //         })
-    //         .then(res => console.log(res.data))
-    //     }, [])
-
-
-    // useEffect(() => {
-    //     fetch("/info/fortune")
-    //         .then((res) => {
-    //             setSelectedMonth(res.data)
-    //             setSelectedDay(res.data)
-    //         })
-    //     }, [])
-
-
-
-    const onSubmitHandler = (e) => {
-        e.preventDefault();
-        let body = {
-            month : selectedMonth,
-            day : selectedDay,
-        }
-        axios.post('http://localhost:5000/info/fortune', body, {
-            withCredentials: true,
-        })
-        .then(res => {
-            // res.data
-            console.log(res)
-        })
+        //     axios.post("https://localhost:3000/info/fortune")
+        //         .then((req) => {
+            //             setSelectedMonth(res.data)
+            //             setSelectedDay(res.data)
+            //         })
+            //         .then(res => console.log(res.data))
+            //     }, [])
+            
+            
+            // useEffect(() => {
+                //     fetch("/info/fortune")
+                //         .then((res) => {
+                    //             setSelectedMonth(res.data)
+                    //             setSelectedDay(res.data)
+                    //         })
+                    //     }, [])
+                    
+                    // const navigate  = useNavigate();
+                    
+                    
+                    const onSubmitHandler = (e) => {
+                        e.preventDefault();
+                        let body = {
+                            month : selectedMonth,
+                            day : selectedDay,
+                        }
+                        window.location.href = '/fortune';
+                        axios.post('http://localhost:5000/info/', body, {
+                            withCredentials: true,
+                        })
+                        .then(res => {
+                            console.log(res);
+                        })
+                        
         // dispatch(body).then((res) => {
         //     setSelectedMonth(res.data)
         //     setSelectedDay(res.data)
