@@ -67,25 +67,25 @@ function SelectDate() {
                     // const navigate  = useNavigate();
                     
                     
-                    const onSubmitHandler = (e) => {
-                        e.preventDefault();
-                        let body = {
-                            month : selectedMonth,
-                            day : selectedDay,
-                        }
-                        window.location.href = '/fortune';
-                        axios.post('http://localhost:5000/info/', body, {
-                            withCredentials: true,
-                        })
-                        .then(res => {
-                            console.log(res);
-                        })
+            const onSubmitHandler = (e) => {
+                e.preventDefault();
+                let body = {
+                    month : selectedMonth,
+                    day : selectedDay,
+                }
+                window.location.href = '/fortune';
+                axios.post('http://localhost:5000/info/', body, {
+                    withCredentials: true,
+                })
+                .then(res => {
+                    console.log(res);
+                })
+            }
                         
         // dispatch(body).then((res) => {
         //     setSelectedMonth(res.data)
         //     setSelectedDay(res.data)
         // })
-    }
 
 
 
