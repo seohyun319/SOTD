@@ -69,13 +69,13 @@ function SelectDate() {
             month : selectedMonth,
             day : selectedDay,
         }
-        axios.post('https://localhost:5000/info/fortune', body, {
+        axios.post('http://localhost:5000/info/', body, {
             withCredentials: true,
         })
         .then(res => {
-            // res.data
-            console.log(res)
+            console.log(res);
         })
+    
         // dispatch(body).then((res) => {
         //     setSelectedMonth(res.data)
         //     setSelectedDay(res.data)
