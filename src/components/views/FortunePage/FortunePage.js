@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import './FortunePage.css'
 import HomeBtn from '../HomeBtn'
 
-
 function FortunePage() {
     let body = {
         month : 5,
@@ -13,28 +12,16 @@ function FortunePage() {
 
     const [users, setUsers] = useState("");
 
-    const fetchUsers = async () => {    //운세
+    const fetchUsers = async () => {
         const response = await axios.post('http://localhost:5000/select/fortune/', body);
         setUsers(response.data);
         console.log(response.data)
     };
-
- useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  const [user, setUser] = useState("");
-
-  
-    const fetchUser = async () => { //category
-        const respons = await axios.post('http://localhost:5000/select/fortunefood/', body);
-        setUser(respons.data.category);
-        
-    };
+    console.log(users);
     
 
  useEffect(() => {
-    fetchUser();
+    fetchUsers();
   }, []);
 
 
