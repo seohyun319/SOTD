@@ -11,6 +11,7 @@ const { Router } = require('express');
 const schedule = require('node-schedule');
 const puppeteer = require('puppeteer');
 const cors=require('cors');
+const cookieParser = require('cookie-parser');
 
 const connection = mysql.createConnection({
     host: conf.host,
@@ -23,6 +24,7 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 // app.use(cors({
@@ -52,6 +54,8 @@ const reset=schedule.scheduleJob('0 0 0 * * *', ()=>{
 app.post('/select/', (req,res)=>{   //생년월일 확인
     var month=req.body.month;
     var day=req.body.day;
+    res.cookie('birthday', 'month');
+    console.log(req.cookies);
     res.send({month: month, day:day});
 })
 
@@ -95,9 +99,9 @@ app.post('/select/fortune/', (req, res)=>{ //생일 받아오기
     var month=req.body.month;
     var day=req.body.day;
     var sql=[month, day];
-    var query=connection.query('SELECT luck FROM birth WHERE (month=? AND day=?)',sql,(err, rows, fields)=>{
-        console.log(JSON.stringify(rows[0].luck));
-        res.send(JSON.stringify(rows[0].luck));
+    var query=connection.query('SELECT luck FROM birth WHERE (month=? AND day=?);',sql,(err, rows, fields)=>{
+        console.log(rows[0]);
+        res.send(rows[0]);
         // request.post('http://localhost:5000/select/fortunefood',{form:{    //category에서 가게 이름 추출하기 위해 전달
         //     category: rows,
         //     month: month,
@@ -108,6 +112,14 @@ app.post('/select/fortune/', (req, res)=>{ //생일 받아오기
 })
 
 app.post('/select/fortunefood/',(req,res)=>{
+    var month=req.body.month;
+    var day=req.body.day;
+    var sql=[month,day];
+
+    var query=connection.query('SELECT distinct F.category FROM FORTUNE F, birth B WHERE F.luck=B.luck and B.luck=(SELECT luck FROM birth WHERE month=? AND day=?)',sql,(err, rows, fields)=>{
+        
+        console.log(rows[0]);
+        res.send(rows[0]);
     // var month=req.body.month;
     // var day=req.body.day;
     // var category=req.body.category;
@@ -124,6 +136,17 @@ app.post('/select/fortunefood/',(req,res)=>{
         //     res.send(array);
         // })
     // }    
+    })
+})
+
+app.post('/select/fortunestore/',(req,res)=>{
+    var store=[vegetable, chicken, tea, cow, nourish, bland, warm, koeran, calcium, fish, vitamin, juk, noodle, meat, fastfood, curry, spicy, western, special, tree, soil, fermentation];
+    var rand=Math.floor(Math.random()*22);
+    console.log(store[rand]);
+    var query=connection.query('SELECT title FROM '+store[rand]+ ' ORDER BY RAND() limit 1',(err, rows, fields)=>{
+        console.log(rows);
+        res.send(rows);
+    })
 })
 
 app.post('/info/color', (req,res)=>{
