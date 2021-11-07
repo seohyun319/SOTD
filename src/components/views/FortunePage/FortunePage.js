@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import { useState, useEffect } from 'react';
+import {Cookies} from "react-cookie";
+
 
 function FortunePage() {
     let body = {
@@ -10,16 +12,28 @@ function FortunePage() {
 
     const [users, setUsers] = useState("");
 
-    const fetchUsers = async () => {
+    const fetchUsers = async () => {    //운세
         const response = await axios.post('http://localhost:5000/select/fortune/', body);
-        setUsers(response.data);
-        //console.log(response.data)
+        setUsers(response.data.luck);
+        
     };
-    console.log(users);
-    
 
  useEffect(() => {
     fetchUsers();
+  }, []);
+
+  const [user, setUser] = useState("");
+
+  
+    const fetchUser = async () => { //category
+        const respons = await axios.post('http://localhost:5000/select/fortunefood/', body);
+        setUser(respons.data.category);
+        
+    };
+    
+
+ useEffect(() => {
+    fetchUser();
   }, []);
 
 

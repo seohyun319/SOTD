@@ -77,7 +77,7 @@ function SelectDate() {
                 .then(res => {
                     console.log(res);
                 })
-                //window.location.href = '/select/fortune';
+                window.location.href = '/select/fortune';
             }
                         
         // dispatch(body).then((res) => {
