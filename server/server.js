@@ -107,6 +107,16 @@ app.post('/select/fortune/', (req, res)=>{ //생일 받아오기
     })
 })
 
+app.post('/select/fortunestore/',(req,res)=>{
+    var store=['vegetable', 'chicken', 'tea', 'cow', 'nourish', 'bland', 'warm', 'koeran', 'calcium', 'fish', 'vitamin', 'juk', 'noodle', 'meat', 'fastfood', 'curry', 'spicy', 'western', 'special', 'tree', 'soil', 'fermentation'];
+    var rand=Math.floor(Math.random()*22);
+    console.log(store[rand]);
+    var query=connection.query('SELECT title FROM '+store[rand]+ ' ORDER BY RAND() limit 1',(err, rows, fields)=>{
+        console.log(rows[0]);
+        res.send(rows[0]);
+    })
+})
+
 app.post('/select/fortunefood/',(req,res)=>{
     // var month=req.body.month;
     // var day=req.body.day;
@@ -126,12 +136,14 @@ app.post('/select/fortunefood/',(req,res)=>{
     // }    
 })
 
-app.post('/info/color', (req,res)=>{
+app.post('/select/color', (req,res)=>{
+    console.log(1);
     var month=req.body.month;
     var day=req.body.day;
     var sql=[month, day];
-    var query=connection.query('SELECT colors, kind, code FROM birth WHERE (month=? AND day=?)',[4,1],(err, rows, fields)=>{
-        console.log(rows);
+    var query=connection.query('SELECT colors, kind, code FROM birth WHERE (month=? AND day=?)',sql,(err, rows, fields)=>{
+        console.log(rows[0]);
+        res.send(rows[0]);
     })
 })
 

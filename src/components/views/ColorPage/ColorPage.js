@@ -1,10 +1,32 @@
 import React from 'react'
+import axios from 'axios'
+import { useState, useEffect } from 'react';
 import HomeBtn from '../HomeBtn'
+import './FortunePage.css'
 
 function ColorPage() {
+    const [color, setColor] = useState()
+    const goToSee = (e) => {
+        e.preventDefault();
+        let body = {
+            month : 3,
+            day : 6,
+        }
+        axios.post('http://localhost:5000/select/color', body)
+        .then(res => {
+            console.log(res);
+            setColor(res.data.title);
+        })
+        // window.location.href = '/select/fortune';
+    }
+
+
+
+
     return (
-        <div>
-            컬러페이지입니다!
+        <div className="base">
+            <h5>오늘 당신에게 맞는 컬러는?</h5>
+            <div>{}</div>
             <HomeBtn />
         </div>
     )

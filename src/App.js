@@ -4,6 +4,7 @@ import FortunePage from './components/views/FortunePage/FortunePage';
 import ColorPage from './components/views/ColorPage/ColorPage';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LandingPage from './components/views/LandingPage';
+import SelectPageColor from './components/views/SelectPage/SelectPageColor';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<LandingPage />}></Route>
           <Route path="/select" element={<SelectPage />}></Route>
+          <Route path="/select-color" element={<SelectPageColor />}></Route>
           <Route path="/select/fortune" element={<FortunePage />}></Route>
           <Route path="/select/color" element={<ColorPage />}></Route>
         </Routes>
