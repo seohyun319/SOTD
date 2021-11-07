@@ -9,6 +9,8 @@ const mysql=require('mysql');
 const request=require('request');
 const { Router } = require('express');
 const schedule = require('node-schedule');
+const puppeteer = require('puppeteer');
+const cors=require('cors');
 
 const connection = mysql.createConnection({
     host: conf.host,
@@ -23,10 +25,10 @@ connection.connect();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-// app.use(cors({
-//     origin: 'http://localhost:3000',
-//     credentials: true
-// }));
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
@@ -50,10 +52,7 @@ const reset=schedule.scheduleJob('0 0 0 * * *', ()=>{
 app.post('/info', (req,res)=>{   //생년월일 확인
     var month=req.body.month;
     var day=req.body.day;
-    if(month!=null && day!=null)
-        res.json({result:true});
-    else
-        res.json({result:false});
+    res.json({month:month, day:day});
 })
 
 // app.post('/info/fortune', (req, res)=>{ //생일 받아오기
@@ -128,6 +127,8 @@ app.post('/info/color', (req,res)=>{
         console.log(rows);
     })
 })
+
+
 
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
