@@ -34,6 +34,16 @@
     grid-area: sex;   
     display: flex; 
 }
+.woman {
+    margin-right: 1rem;
+}
+.sex > div > input[type=radio] {
+    margin-right: 0.3rem;
+}
+.ymd > select:nth-child(2),
+.ymd > select:nth-child(3) {
+    margin-left: 0.5rem;
+}
 Button {
     grid-area: btn;        
 }
