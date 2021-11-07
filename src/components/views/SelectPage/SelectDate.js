@@ -40,7 +40,6 @@ function SelectDate() {
     return (
         <div>
             <select value={selectedYear} onChange={handleSelectYear}>
-                console.log(1)
                 {year()}
             </select>년
             <select value={selectedMonth} onChange={handleSelectMonth}>

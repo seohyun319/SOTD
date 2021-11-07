@@ -1,5 +1,7 @@
 .App {
     justify-content: center;
+    align-items: center;
+    height: 100vh;
     display: flex;
 }
 
@@ -7,6 +9,11 @@
     max-width: 60rem;
     display: grid;
     grid-template-columns:1fr 1fr;
+    grid-row-gap: 1rem;
+    background-color: rgb(28 34 48 / 50%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
     grid-template-areas:
         'q_sex sex'
         'q_birth birth'
@@ -30,3 +37,6 @@
 Button {
     grid-area: btn;        
 }
+
+
+/* select date */
