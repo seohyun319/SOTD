@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import './FortunePage.css'
+import HomeBtn from '../HomeBtn'
 
 function FortunePage(dataToSubmit) {
     let body = {
@@ -31,8 +33,9 @@ function FortunePage(dataToSubmit) {
     // }
 
     return (
-        <div>
+        <div className="base">
             결과 페이지입니당
+            <HomeBtn />
         </div>
     )
 }
