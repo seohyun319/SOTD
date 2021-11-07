@@ -73,13 +73,11 @@ function SelectDate() {
                     month : selectedMonth,
                     day : selectedDay,
                 }
-                window.location.href = '/fortune';
-                axios.post('http://localhost:5000/info/', body, {
-                    withCredentials: true,
-                })
+                axios.post('http://localhost:5000/select/', body)
                 .then(res => {
                     console.log(res);
                 })
+                window.location.href = '/select/fortune';
             }
                         
         // dispatch(body).then((res) => {
