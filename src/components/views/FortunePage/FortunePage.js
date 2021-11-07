@@ -2,15 +2,18 @@ import React from 'react'
 import axios from 'axios'
 import './FortunePage.css'
 import HomeBtn from '../HomeBtn'
+import {useState} from 'react'
 
 function FortunePage(dataToSubmit) {
-    
+    const [fortuneResult, setFortuneResult] = useState("")
     let body = {
         month : 5,
         day : 15,
     }
     const request = axios.post('http://localhost:5000/select/fortune/', body)
-        .then(response => {console.log(response)})
+        .then(response => {
+            console.log(response)
+        })
         
     // return {
         
