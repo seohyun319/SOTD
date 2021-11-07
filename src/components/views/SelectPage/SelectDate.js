@@ -69,7 +69,7 @@ function SelectDate() {
             month : selectedMonth,
             day : selectedDay,
         }
-        axios.post('https://localhost:5000/info/fortune', body, {
+        axios.post('http://localhost:5000/info/fortune', body, {
             withCredentials: true,
         })
         .then(res => {
