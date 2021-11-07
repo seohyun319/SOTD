@@ -25,10 +25,10 @@ connection.connect();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true
-}));
+// app.use(cors({
+//     origin: 'http://localhost:3000',
+//     credentials: true
+// }));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
@@ -36,7 +36,7 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
     (req.method === 'OPTIONS') ?
-    res.send(200) :
+    res.sendStatus(200) :
     next();
 })
 
@@ -95,32 +95,35 @@ app.post('/select/fortune/', (req, res)=>{ //생일 받아오기
     var month=req.body.month;
     var day=req.body.day;
     var sql=[month, day];
-    var query=connection.query('SELECT category FROM FORTUNE WHERE luck=(SELECT luck FROM birth WHERE month=? AND day=?)',sql,(err, rows, fields)=>{
-        request.post('http://localhost:5000/select/fortunefood',{form:{    //category에서 가게 이름 추출하기 위해 전달
-            category: rows,
-            month: month,
-            day: day
-        }})
-        res.send(rows);
+    var query=connection.query('SELECT luck FROM birth WHERE (month=? AND day=?)',sql,(err, rows, fields)=>{
+        console.log(JSON.stringify(rows[0].luck));
+        res.send(JSON.stringify(rows[0].luck));
+        // request.post('http://localhost:5000/select/fortunefood',{form:{    //category에서 가게 이름 추출하기 위해 전달
+        //     category: rows,
+        //     month: month,
+        //     day: day
+        // }})
+       
     })
 })
 
 app.post('/select/fortunefood/',(req,res)=>{
-    var month=req.body.month;
-    var day=req.body.day;
-    var sql=[month, day];
-    var category=req.body.category; //category column 값
-    var cate;
-    for(var i=0;i<category.length;i++)
-        cate=(category[i].category).split(', ');    //category를 , 기준으로 나누기
-    for(var i=0;i<cate.length;i++){
-        var query=connection.query('SELECT distinct title FROM '+ cate[i]+' ORDER BY RAND() limit 1;'+'SELECT luck FROM birth WHERE month=? AND day=?',sql,(err,rows,fields)=>{
-            res.json(rows);
-            return;
-        })
-        return;
-    }
-    return;      
+    // var month=req.body.month;
+    // var day=req.body.day;
+    // var category=req.body.category;
+    // var cate=category[0].category;
+    // var arr=cate.split(', ');
+    // var sql=[month, day];
+
+    // for(var i=0;i<cate.length;i++){
+        // var query=connection.query('SELECT distinct title FROM '+ arr[0]+' ORDER BY RAND() limit 1;'+'SELECT luck FROM birth WHERE (month=? AND day=?)',sql,(err,rows,fields)=>{
+        //     var title=rows[0][0].title;
+        //     var luck=rows[1][0].luck;
+        //     var array=title+'@ '+luck;
+        //     console.log(array);
+        //     res.send(array);
+        // })
+    // }    
 })
 
 app.post('/info/color', (req,res)=>{

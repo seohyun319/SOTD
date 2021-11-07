@@ -1,14 +1,30 @@
 import React from 'react'
 import axios from 'axios'
+import { useState, useEffect } from 'react';
 
-function FortunePage(dataToSubmit) {
-    
+function FortunePage() {
     let body = {
         month : 5,
         day : 15,
     }
-    const request = axios.post('http://localhost:5000/select/fortune/', body)
-        .then(response => {console.log(response)})
+
+    const [users, setUsers] = useState("");
+
+    const fetchUsers = async () => {
+        const response = await axios.post('http://localhost:5000/select/fortune/', body);
+        setUsers(response.data);
+        //console.log(response.data)
+    };
+    console.log(users);
+    
+
+ useEffect(() => {
+    fetchUsers();
+  }, []);
+
+
+    // const request = axios.post('http://localhost:5000/select/fortune', body)
+    //     .then(response => {console.log(response)})
         
     // return {
         
