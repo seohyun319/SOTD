@@ -4,7 +4,7 @@ import SelectTime from './SelectTime'
 import {Button} from 'react-bootstrap'
 import './SelectPage.css'
 import SelectSex from './SelectSex'
-import onSubmitHandler from './SelectDate'
+import {onSubmitHandler} from './SelectDate.js'
 
 function SelectPage() {
     
@@ -17,6 +17,7 @@ function SelectPage() {
             <div className="title_q q_time">몇 시에 태어났나요?</div>
                 <SelectTime></SelectTime>
             {/* <Button onClick={onSubmitHandler} variant="outline-info">결과 보러 가기</Button> */}
+            
         </div>
     )
 }
