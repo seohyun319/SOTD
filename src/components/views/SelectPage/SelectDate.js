@@ -1,5 +1,8 @@
 import React from 'react'
+import { useEffect } from 'react';
 import { useState } from 'react';
+import { Button} from 'react-bootstrap';
+import axios from 'axios';
 
 function SelectDate() {
     const [selectedYear, setSelectedYear] = useState();
@@ -37,6 +40,51 @@ function SelectDate() {
         return result;
     };
 
+    
+
+
+    // useEffect(() => {
+    //     axios.post("https://localhost:3000/info/fortune")
+    //         .then((req) => {
+    //             setSelectedMonth(res.data)
+    //             setSelectedDay(res.data)
+    //         })
+    //         .then(res => console.log(res.data))
+    //     }, [])
+
+
+    // useEffect(() => {
+    //     fetch("/info/fortune")
+    //         .then((res) => {
+    //             setSelectedMonth(res.data)
+    //             setSelectedDay(res.data)
+    //         })
+    //     }, [])
+
+
+
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+        console.log('month', selectedMonth)
+        console.log('day', selectedDay)
+        let body = {
+            month : selectedMonth,
+            day : selectedDay,
+        }
+        axios.post('https://localhost:5000/info/fortune', body)
+        .then(res => {
+            // res.data
+            console.log(res)
+        })
+        // dispatch(body).then((res) => {
+        //     setSelectedMonth(res.data)
+        //     setSelectedDay(res.data)
+        // })
+    }
+
+
+
+
     return (
         <div>
             <select value={selectedYear} onChange={handleSelectYear}>
@@ -48,6 +96,8 @@ function SelectDate() {
             <select value={selectedDay} onChange={handleSelectDay}>
                 {day()}
             </select>일
+            <Button onClick={onSubmitHandler} variant="outline-info">결과 보러 가기</Button>
+
         </div>
     )
 }
