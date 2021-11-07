@@ -1,0 +1,19 @@
+.base {
+    min-width: 30rem;
+    width: 80%;
+    background-color: rgb(28 34 48 / 50%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    flex-direction: column;
+    column-gap: 1rem;
+    row-gap: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+h5 {
+    color: rgb(213, 195, 255);
+}
