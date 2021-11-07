@@ -14,6 +14,7 @@ function SelectDate() {
     const handleSelectDay = (e) => {
         setSelectedDay(e.target.value);
     };
+    
     const year = () => {
         const result = [];
         for (let i = 2020; i > 1930; i--) {
